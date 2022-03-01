@@ -15,3 +15,8 @@ The little cards my grandma wrote the recipes on in her beautiful cursive are ge
 3. Homepage to view all entered `recipes`.
 
 4. Ability to search for `recipes` by `title` or tagged `categories`.
+
+<p>
+    <img src="./assets/api_design.png" alt="API Design Picture">
+    <img src="./assets/schema_design.png" alt="Database Schema Design Picture">
+</p>
