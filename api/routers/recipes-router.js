@@ -1,8 +1,14 @@
+// Dependencies
 const express = require('express');
 const router = express.Router();
 
+// Models
+const Recipes = require('../models/recipes-model.js');
+
 router.get('/', (req, res) => {
-	res.json('Find all Recipes!');
+	Recipes.findAll().then((recipes) => {
+		res.status(200).json(recipes);
+	});
 });
 
 router.get('/:id', (req, res) => {
