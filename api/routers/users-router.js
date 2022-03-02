@@ -11,4 +11,29 @@ router.get("/", async (req, res, next) => {
     });
 });
 
+router.get("/:id", async (req, res, next) => {
+  const { id } = req.params;
+  Users.findUserById(id)
+    .then((user) => {
+      if (user.length > 0) {
+        res.status(200).json(user);
+      } else {
+        next({ status: 404, message: " username doesn't exist" });
+      }
+    })
+    .catch((err) => {
+      next(err);
+    });
+});
+
+router.post("/", async (req, res, next) => {
+  Users.createUser()
+    .then((newUser) => {
+      res.status(201).json(newUser);
+    })
+    .catch((err) => {
+      next(err);
+    });
+});
+
 module.exports = router;
