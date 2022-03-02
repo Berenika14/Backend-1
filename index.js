@@ -1,5 +1,6 @@
-const server = require('./src/api/server');
+require("dotenv").config();
+const server = require("./src/api/server");
 
-const PORT = process.env.PORT || 4000;
+const PORT = process.env.PORT || 4000; // eslint-disable-line
 
-server.listen(PORT, () => console.log(`Server is running on ${PORT}`));
+server.listen(PORT, () => console.log(`Server is running on ${PORT} 👀`));
