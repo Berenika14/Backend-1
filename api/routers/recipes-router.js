@@ -5,6 +5,9 @@ const router = express.Router();
 // Models
 const Recipes = require('../models/recipes-model.js');
 
+// Middlewares
+const { validateBody } = require('../middleware/recipes-middleware.js');
+
 router.get('/', (req, res) => {
 	Recipes.findAll().then((recipes) => {
 		res.status(200).json(recipes);
@@ -24,7 +27,7 @@ router.get('/:id', (req, res) => {
 		.catch((err) => res.status(500).json({ error: err }));
 });
 
-router.post('/', (req, res) => {
+router.post('/', validateBody, (req, res) => {
 	res.json('Create new Recipe!');
 });
 
