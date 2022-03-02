@@ -1,35 +1,39 @@
 {
-  "name": "backend-1",
-  "version": "1.0.0",
-  "description": "## 🤟🏻**Pitch**",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "server": "nodemon index.js",
-    "start": "node index.js",
-    "migrate": "knex migrate:latest",
-    "rollback": "knex migrate:rollback",
-    "seeds": "knex seed:run"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/Berenika14/Backend-1.git"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/Berenika14/Backend-1/issues"
-  },
-  "homepage": "https://github.com/Berenika14/Backend-1#readme",
-  "devDependencies": {
-    "@vscode/sqlite3": "^5.0.7",
-    "eslint": "^8.10.0",
-    "nodemon": "^2.0.15"
-  },
-  "dependencies": {
-    "dotenv": "^16.0.0",
-    "express": "^4.17.3",
-    "knex": "^1.0.3"
-  }
+	"name": "backend-1",
+	"version": "1.0.0",
+	"description": "## 🤟🏻**Pitch**",
+	"main": "index.js",
+	"scripts": {
+		"test": "cross-env NODE_ENV=testing jest --verbose --verbose --runInBand --passWithNoTests --silent",
+		"server": "nodemon index.js",
+		"start": "node index.js",
+		"migrate": "knex migrate:latest",
+		"rollback": "knex migrate:rollback",
+		"seeds": "knex seed:run"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/Berenika14/Backend-1.git"
+	},
+	"keywords": [],
+	"author": "",
+	"license": "ISC",
+	"bugs": {
+		"url": "https://github.com/Berenika14/Backend-1/issues"
+	},
+	"homepage": "https://github.com/Berenika14/Backend-1#readme",
+	"devDependencies": {
+		"@vscode/sqlite3": "^5.0.7",
+		"cross-env": "^7.0.3",
+		"eslint": "^8.10.0",
+		"jest": "^27.5.1",
+		"nodemon": "^2.0.15"
+	},
+	"dependencies": {
+		"cors": "^2.8.5",
+		"dotenv": "^16.0.0",
+		"express": "^4.17.3",
+		"helmet": "^5.0.2",
+		"knex": "^1.0.3"
+	}
 }
