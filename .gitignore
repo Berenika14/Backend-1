@@ -16,6 +16,7 @@ report.[0-9]_.[0-9]_.[0-9]_.[0-9]_.json
 
 things.todo
 dev.db3
+test.db3
 
 # Runtime data
 
