@@ -1,4 +1,4 @@
-const db = require("../../../data/db");
+const db = require("../../configs/db");
 
 function findAll() {
   return db("users");
