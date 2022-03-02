@@ -12,11 +12,20 @@ router.get('/', (req, res) => {
 });
 
 router.get('/:id', (req, res) => {
-	res.json('Find specific Recipe!');
+	const { id } = req.params;
+	Recipes.findById(id)
+		.then((recipe) => {
+			if (recipe.length > 0) {
+				res.status(200).json(recipe);
+			} else {
+				res.status(404).json({ message: "That Recipe doesn't exist!" });
+			}
+		})
+		.catch((err) => res.status(500).json({ error: err }));
 });
 
 router.post('/', (req, res) => {
-	res.json('Post new Recipe!');
+	res.json('Create new Recipe!');
 });
 
 router.put('/:id', (req, res) => {
