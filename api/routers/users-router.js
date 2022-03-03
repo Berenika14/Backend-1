@@ -1,4 +1,5 @@
 const router = require("express").Router();
+const bcrypt = require("bcrypt");
 const Users = require("../models/users-model");
 
 const {
@@ -33,12 +34,15 @@ router.get("/:id", async (req, res, next) => {
 });
 
 router.post(
-  "/",
+  "/register",
   validateBody,
   checkIfUsernameExists,
   checkIfEmailExists,
   async (req, res, next) => {
-    Users.createUser(req.body)
+    const user = req.body;
+    const hash = bcrypt.hashSync(user.password, 15);
+    user.password = hash;
+    Users.createUser(user)
       .then((newUser) => {
         res.status(201).json(newUser);
       })
