@@ -1,6 +1,9 @@
 const Users = require("../models/users-model");
 
 async function validateBody(req, res, next) {
+  if (!req.body || typeof req.body !== "object") {
+    return next({ status: 400, message: "Request.body is not an object!" });
+  }
   const { username, password, email } = req.body;
   try {
     if (!username || !password || !email || password.length < 3) {
@@ -47,4 +50,20 @@ async function checkIfEmailExists(req, res, next) {
   }
 }
 
-module.exports = { checkIfUsernameExists, validateBody, checkIfEmailExists };
+async function FindUserByUsername(req, res, next) {
+  Users.findUsername(req.body.username).then((user) => {
+    if (user) {
+      req.dbUser = user;
+      next();
+    } else {
+      next({ status: 400, message: " Invalid Username" });
+    }
+  });
+}
+
+module.exports = {
+  checkIfUsernameExists,
+  validateBody,
+  checkIfEmailExists,
+  FindUserByUsername,
+};

@@ -1,11 +1,13 @@
 const router = require("express").Router();
 const bcrypt = require("bcrypt");
+const jwt = require("jsonwebtoken");
 const Users = require("../models/users-model");
 
 const {
   checkIfUsernameExists,
   validateBody,
   checkIfEmailExists,
+  FindUserByUsername,
 } = require("../middleware/users-middleware");
 
 router.get("/", async (req, res, next) => {
@@ -52,11 +54,22 @@ router.post(
   }
 );
 
-router.post("/login", async (req, res, next) => {
-  try {
-    res.json("LOGIN HERE");
-  } catch (err) {
-    next(err);
+router.post("/login", validateBody, FindUserByUsername, (req, res, next) => {
+  if (bcrypt.compareSync(req.body.password, req.dbUser.password)) {
+    const payload = {
+      id: req.dbUser.id,
+      username: req.dbUser.password,
+    };
+    const token = jwt.sign(payload, "any random character", {
+      expiresIn: "365d",
+    });
+    const outcome = {
+      message: `Welcome ${req.dbUser.username} 👋 `,
+      token,
+    };
+    res.status(200).json(outcome);
+  } else {
+    next();
   }
 });
 
