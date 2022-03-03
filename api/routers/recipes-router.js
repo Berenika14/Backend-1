@@ -28,14 +28,11 @@ router.get("/:id", (req, res) => {
 });
 
 router.post("/", validateBody, (req, res) => {
-  const recipe = req.recipe;
-  Recipes.newRecipe(recipe)
-    .then((newRecipe) => {
-      res.status(201).json(newRecipe);
+  Recipes.newRecipe(req.recipe)
+    .then((recipe) => {
+      res.status(201).json(recipe);
     })
-    .catch((err) => {
-      res.status(500).json({ error: err });
-    });
+    .catch((err) => res.status(500).json({ error: err }));
 });
 
 router.put("/:id", (req, res) => {
