@@ -7,14 +7,15 @@ const Recipes = require("../models/recipes-model.js");
 
 // Middlewares
 const { validateBody } = require("../middleware/recipes-middleware.js");
+const restricted = require("../middleware/restricted");
 
-router.get("/", (req, res) => {
+router.get("/", restricted, (req, res) => {
   Recipes.findAll().then((recipes) => {
     res.status(200).json(recipes);
   });
 });
 
-router.get("/:id", (req, res) => {
+router.get("/:id", restricted, (req, res) => {
   const { id } = req.params;
   Recipes.findById(id)
     .then((recipe) => {
@@ -27,7 +28,7 @@ router.get("/:id", (req, res) => {
     .catch((err) => res.status(500).json({ error: err }));
 });
 
-router.post("/", validateBody, (req, res) => {
+router.post("/", restricted, validateBody, (req, res) => {
   Recipes.newRecipe(req.recipe)
     .then((recipe) => {
       res.status(201).json(recipe);

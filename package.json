@@ -31,7 +31,6 @@
 	},
 	"homepage": "https://github.com/Berenika14/Backend-1#readme",
 	"devDependencies": {
-		"@vscode/sqlite3": "^5.0.7",
 		"cross-env": "^7.0.3",
 		"eslint": "^8.10.0",
 		"jest": "^27.5.1",
