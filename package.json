@@ -10,10 +10,10 @@
 		"migrate:dev": "knex migrate:latest",
 		"rollback:dev": "knex migrate:rollback",
 		"seeds:dev": "knex seed:run",
-		"migrate:prod": "heroku run knex migrate:latest -a aaron-recipe",
-		"rollback:prod": "heroku run knex migrate:rollback -a aaron-recipe",
-		"database:prod": "heroku pg:psql -a aaron-recipe",
-		"seeds:prod": "heroku run knex seed:run -a aaron-recipe",
+		"migrate:prod": "heroku run knex migrate:latest -a secret-friends-recipe-app",
+		"rollback:prod": "heroku run knex migrate:rollback -a secret-friends-recipe-app",
+		"database:prod": "heroku pg:psql -a secret-friends-recipe-app",
+		"seeds:prod": "heroku run knex seed:run -a secret-friends-recipe-app",
 		"deploy": "git push heroku main"
 	},
 	"engines": {
