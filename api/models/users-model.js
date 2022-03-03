@@ -14,4 +14,13 @@ const createUser = async (body) => {
   return user;
 };
 
-module.exports = { findAll, findUserById, createUser };
+const findUsername = async (username) => {
+  let result = await db("users").where("username", username);
+  return result[0];
+};
+const findEmail = async (email) => {
+  let result = await db("users").where("email", email);
+  return result[0];
+};
+
+module.exports = { findAll, findUserById, createUser, findUsername, findEmail };
