@@ -52,4 +52,12 @@ router.post(
   }
 );
 
+router.post("/login", async (req, res, next) => {
+  try {
+    res.json("LOGIN HERE");
+  } catch (err) {
+    next(err);
+  }
+});
+
 module.exports = router;
