@@ -1,3 +1,4 @@
+//Models
 const Users = require("../models/users-model");
 
 async function validateBody(req, res, next) {
@@ -12,6 +13,24 @@ async function validateBody(req, res, next) {
         message = "You forgot to provide password";
       } else if (!email) {
         message = "You Forgot to provide email";
+      } else if (password.length < 3) {
+        message = "Password should be more than 5 characters";
+      }
+      next({ status: 400, message });
+    } else {
+      next();
+    }
+  } catch (err) {
+    next(err);
+  }
+}
+async function validateLoginBody(req, res, next) {
+  const { username, password } = req.body;
+  try {
+    if (!username || !password || password.length < 3) {
+      let message = "You forgot providing username";
+      if (!password) {
+        message = "You forgot to provide password";
       } else if (password.length < 3) {
         message = "Password should be more than 5 characters";
       }
@@ -66,4 +85,5 @@ module.exports = {
   validateBody,
   checkIfEmailExists,
   FindUserByUsername,
+  validateLoginBody,
 };

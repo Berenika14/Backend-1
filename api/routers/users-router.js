@@ -1,13 +1,18 @@
+//Dependencies
 const router = require("express").Router();
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
+
+//Models
 const Users = require("../models/users-model");
 
+//MiddleWares
 const {
   checkIfUsernameExists,
   validateBody,
   checkIfEmailExists,
   FindUserByUsername,
+  validateLoginBody,
 } = require("../middleware/users-middleware");
 
 router.get("/", async (req, res, next) => {
@@ -54,23 +59,28 @@ router.post(
   }
 );
 
-router.post("/login", validateBody, FindUserByUsername, (req, res, next) => {
-  if (bcrypt.compareSync(req.body.password, req.dbUser.password)) {
-    const payload = {
-      id: req.dbUser.id,
-      username: req.dbUser.password,
-    };
-    const token = jwt.sign(payload, "any random character", {
-      expiresIn: "365d",
-    });
-    const outcome = {
-      message: `Welcome ${req.dbUser.username} 👋 `,
-      token,
-    };
-    res.status(200).json(outcome);
-  } else {
-    next();
+router.post(
+  "/login",
+  validateLoginBody,
+  FindUserByUsername,
+  (req, res, next) => {
+    if (bcrypt.compareSync(req.body.password, req.dbUser.password)) {
+      const payload = {
+        id: req.dbUser.id,
+        username: req.dbUser.password,
+      };
+      const token = jwt.sign(payload, "any random character", {
+        expiresIn: "365d",
+      });
+      const outcome = {
+        message: `Welcome ${req.dbUser.username} 👋 `,
+        token,
+      };
+      res.status(200).json(outcome);
+    } else {
+      next();
+    }
   }
-});
+);
 
 module.exports = router;
