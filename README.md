@@ -16,6 +16,10 @@ The little cards my grandma wrote the recipes on in her beautiful cursive are ge
 
 4. Ability to search for `recipes` by `title` or tagged `categories`.
 
+## 👌 Base URL
+
+https://secret-friends-recipe-app.herokuapp.com/
+
 <p>
     <img src="./assets/api_design.png" alt="API Design Picture">
     <img src="./assets/schema_design.png" alt="Database Schema Design Picture">
